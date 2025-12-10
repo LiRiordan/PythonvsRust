@@ -41,8 +41,12 @@ impl Matrix {
 	pub fn zero(source: usize, target: usize) -> Matrix {
 		Matrix{source: source, target: target, entries: vec![vec![0.0; source];target]}
 	}
-	//pub fn transpose(&self) -> Matrix {
-	//	let tr_entries: Vec<Vec<f64>> = (0..self.source).map( |s| { (0..self.target).map(|r| &self.entries[r][s]).collect()}).collect();
-	//	Matrix{source:self.target, target: self.source, entries: tr_entries} 
-	//}	
+	pub fn transpose(&self) -> Matrix {
+		let mut tr_entries: Vec<Vec<f64>> = Vec::new();
+		for i in 0..self.source {
+			let row: Vec<f64> = (0..self.target).map(|x| self.entries[x][i]).collect();
+			tr_entries.push(row);
+		}
+		Matrix{source:self.target, target: self.source, entries: tr_entries} 
+	}	
 }  
