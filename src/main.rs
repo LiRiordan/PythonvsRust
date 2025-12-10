@@ -1,7 +1,7 @@
 mod modules;
 use crate::modules::vectors::NdVector;
 use crate::modules::matrices::Matrix;
-
+//use crate::modules::algorithms::Algorithms;
 
 
 fn main() {
@@ -14,4 +14,7 @@ fn main() {
 	let b: NdVector<2> = NdVector{coords: [1.0, 0.0]};
 	println!("The projection of 1,1 onto 1,0 is {:?}", a.project_to(&b).coords);
 	println!("The projection of 1,0 onto 1,1 is {:?}", b.project_to(&a).coords);
+	let m2: Matrix<2, 2> = Matrix::from_vectors(vec![a, b]);
+	println!("Can we glue vectors together?: {:?}", m2);
+	println!("The Gram-Schmidt algorithm applied to this matrix is {:?}", m2.gs());
 }

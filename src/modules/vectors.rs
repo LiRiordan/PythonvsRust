@@ -18,18 +18,18 @@ impl<const N: usize>  NdVector<N> {
 	pub fn norm(&self) -> f64 {
 		self.dot_with(&self).sqrt()
 	}
-	pub fn normalise(&self) -> NdVector<N> {
+	pub fn normalise(&mut self) {
 		let coords: [f64; N] = arrays::from_iter((0..N).map(|i| self.coords[i]/self.norm())).unwrap();
-		NdVector {coords: coords}
+		self.coords = coords
 	}
 	pub fn project_to(&self, v: &NdVector<N>) -> NdVector<N> {
 		let t: f64 = self.dot_with(v)/v.norm();
 		let coords: [f64; N] = arrays::from_iter((0..N).map(|i| t*v.coords[i])).unwrap();
 		NdVector {coords: coords}
 	}
-	pub fn project_and_sub(&self, v: &NdVector<N>) -> NdVector<N> {
+	pub fn project_and_sub(&mut self, v: &NdVector<N>) {
 		let coords: [f64; N] = arrays::from_iter((0..N).map(|i| self.coords[i] - self.project_to(v).coords[i])).unwrap();
-		NdVector {coords: coords}	
+		self.coords = coords	
 	}
 }
 

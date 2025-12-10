@@ -27,7 +27,9 @@ impl<const N: usize, const M: usize> Matrix<N,M> {
 		Matrix {entries: tr_entries} 
 	}	
 	pub fn recover_column(&self, j: usize) -> NdVector<M> {
-		let coords: [f64; M] = arrays::from_iter((0..M).map(|i| self.entries[i][j])).unwrap();
+		let coords: [f64; M] = arrays::from_iter((0..M)
+							.map(|i| self.entries[i][j]))
+							.unwrap();
 		NdVector {coords: coords}
 	}
 	pub fn recover_row(&self, i: usize) -> NdVector<N> {
@@ -36,4 +38,26 @@ impl<const N: usize, const M: usize> Matrix<N,M> {
 	pub fn square(&self) -> bool {
 		N == M
 	}
+	pub fn from_vectors(lv: Vec<NdVector<N>>) -> Matrix<N, M> {
+		if lv.len() != M {
+			panic!("This list cannot be used to form a {}x{}-matrix", N, M);
+		}
+		let entries = arrays::from_iter((0..M)
+						.map(|i| 
+						{arrays::from_iter((0..N).map(|j| lv[i].coords[j])).unwrap()}))
+										.unwrap();
+		Matrix{entries: entries}
+	}
+	pub fn gs(&self) -> Matrix<N,M> {
+                let mut holder: Vec<NdVector<N>> = Vec::new();
+                for i in 0..M {
+                        let mut row: NdVector<N> = self.recover_row(i);
+                        for w in &holder {
+                                row.project_and_sub(&w);
+                        }
+                        row.normalise();
+                        holder.push(row);
+                }
+                Matrix::from_vectors(holder)
+        }
 }  
