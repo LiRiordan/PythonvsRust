@@ -9,4 +9,6 @@ fn main() {
 	let v: NdVector = NdVector{coords: vec![0.2, -0.9, 1.4]};
 	println!("The product of this matrix by this vector is {:?}", mat.mul(&v).coords);   
 	println!("The transpose of this matrix is {:?}", mat.transpose());
+	println!("The second column of mat is {:?}", mat.recover_column(1));
+	println!("The second row of mat is {:?}", mat.recover_row(1));
 }

@@ -49,4 +49,10 @@ impl Matrix {
 		}
 		Matrix{source:self.target, target: self.source, entries: tr_entries} 
 	}	
+	pub fn recover_column(&self, i: usize) -> NdVector {
+		NdVector{coords: (0..self.target).map(|x| self.entries[x][i]).collect()}
+	}
+	pub fn recover_row(&self, i: usize) -> NdVector {
+		NdVector{coords: self.entries[i].clone()}
+	}
 }  

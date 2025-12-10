@@ -18,4 +18,9 @@ impl NdVector {
 		let t: f64 = self.dot_with(&self);
 		t.sqrt()
 	}
+	pub fn scale_with(&self, v: &NdVector) -> f64 {
+		let t: f64 = self.dot_with(v);
+		t/self.norm()
+	}
+		
 }
