@@ -5,3 +5,12 @@ version = 4
 [[package]]
 name = "PythonvsRust"
 version = "0.1.0"
+dependencies = [
+ "arrays",
+]
+
+[[package]]
+name = "arrays"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "66825bca5205bfeadd27d65205727e52a0f8e12458685c9a20d63e64b8db8d67"

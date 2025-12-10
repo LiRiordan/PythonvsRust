@@ -1,58 +1,39 @@
 use crate::NdVector;
 
 #[derive(Debug)]
-pub struct Matrix {
-	pub source: usize,
-	pub target: usize,
-	pub entries: Vec<Vec<f64>>,
+pub struct Matrix<const N: usize, const M: usize> {
+	pub entries: [[f64; N]; M],
 }
 
-impl Matrix {
-	pub fn from_string(f: &'static str) -> Matrix {
-		let mut entries: Vec<Vec<f64>> = Vec::new();
-		let rows: Vec<&str> = f.split(";").collect();
-		for row in rows {
-			let coords: Vec<&str> = row.split_whitespace().collect();
-			let mut row_hold: Vec<f64> = Vec::new();
-			for coord in coords {
-				row_hold.push(coord.parse::<f64>().unwrap());
+impl<const N: usize, const M: usize> Matrix<N,M> {
+	pub fn mul(&self, v: &NdVector<N>) -> NdVector<M> {
+		let mut w: [f64; M]  = [0.0; M];
+		for i in 0..M {
+			let mut t: f64 = 0.0;
+			for j in 0..N {
+				t += &self.entries[i][j]*v.coords[j];
 			}
-			entries.push(row_hold);
-		}
-		let target: usize = entries.len();
-		let source: usize = entries[0].len();
-		Matrix{source: source, target: target, entries: entries}
+			w[i] = t;
+			}
+		NdVector {coords: w}
 	}
-	pub fn mul(&self, v: &NdVector) -> NdVector {
-		if self.source != v.coords.len() {
-			panic!("This vector has the wrong dimension to be multiplied by this matrix");
+	pub fn transpose(&self) -> Matrix<M,N> {
+		let mut tr_entries: [[f64;M]; N] = [[0.0; M]; N];
+		for i in 0..M {
+			for j in 0..N {
+				tr_entries[j][i] = self.entries[i][j];
+			}
 		}
-		else {  let mut w: Vec<f64> = Vec::new();
-			for row in &self.entries {
-				let mut t: f64 = 0.0;
-				for i in 0..self.source {
-					t += row[i]*v.coords[i];
-				}
-				w.push(t);
-				}
-		NdVector{coords: w}
-		}
-	}
-	pub fn zero(source: usize, target: usize) -> Matrix {
-		Matrix{source: source, target: target, entries: vec![vec![0.0; source];target]}
-	}
-	pub fn transpose(&self) -> Matrix {
-		let mut tr_entries: Vec<Vec<f64>> = Vec::new();
-		for i in 0..self.source {
-			let row: Vec<f64> = (0..self.target).map(|x| self.entries[x][i]).collect();
-			tr_entries.push(row);
-		}
-		Matrix{source:self.target, target: self.source, entries: tr_entries} 
+		Matrix {entries: tr_entries} 
 	}	
-	pub fn recover_column(&self, i: usize) -> NdVector {
-		NdVector{coords: (0..self.target).map(|x| self.entries[x][i]).collect()}
+	pub fn recover_column(&self, j: usize) -> NdVector<M> {
+		let coords: [f64; M] = arrays::from_iter((0..M).map(|i| self.entries[i][j])).unwrap();
+		NdVector {coords: coords}
 	}
-	pub fn recover_row(&self, i: usize) -> NdVector {
-		NdVector{coords: self.entries[i].clone()}
+	pub fn recover_row(&self, i: usize) -> NdVector<N> {
+		NdVector {coords: self.entries[i]}
+	}
+	pub fn square(&self) -> bool {
+		N == M
 	}
 }  
