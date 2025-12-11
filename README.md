@@ -6,12 +6,14 @@ use the minimal numbers of imports in both cases. In particular, the Python libr
 --- 
 
 ## Current structure: 
-- main.rs
-- modules
-  - vectors.rs
-  - matrices.rs
-  - mod.rs
-  - algorithms.rs
+
+- src
+  - main.rs
+  - modules
+    - vectors.rs
+    - matrices.rs
+    - mod.rs
+    - algorithms.rs
 
 Along with the Rust files there are Cargo files which are used in any Rust crate. 
 
