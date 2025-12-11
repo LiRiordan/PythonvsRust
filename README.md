@@ -21,7 +21,7 @@ Currently contains some examples functions from the library.
 ### vectors.rs:
 Defines the struct NdVector 
 
-'''rs
+'''rust
 pub struct NdVector<const N: usize> {
       pub coords: [f64; N]
 } '''
@@ -29,7 +29,7 @@ pub struct NdVector<const N: usize> {
 In order to be able to store as much as possible on the stack rather than the heap we use arrays but this requires passing the struct the length of the vector.
 
 **Example**
-'''rs
+'''rust
 let v: NdVector<3> = NdVector{coords: [0.2, -0.9, 1.4]}
 '''
 
@@ -47,7 +47,7 @@ We will add clear documentation for these functions at a later date.
 
 Defines the struct Matrix
 
-'''rs
+'''rust
 pub struct Matrix<const N:usize, const M: usize> {
       pub entries: [[f64; N]; M]
 }'''
@@ -55,7 +55,7 @@ pub struct Matrix<const N:usize, const M: usize> {
 Again the generic parameters serve to allow us to use arrays over vectors to exploit stack memory over heap memory.
 
 **Example**
-'''rs
+'''rust
 let m: Matrix<3, 2> = Matrix{entries: [[1.0, 4.2, 9.3], [-0.3, -0.6, 2.2]]}
 '''
 
@@ -80,7 +80,7 @@ Again we will add more documentation for these at a later date.
 We will now start adding more linear algebra algorithms for these two structs. Currently we have the Gram-Schmidt algorithm for the rows of a matrix through the function .gs()
 
 **Example**
-'''rs
+'''rust
 let a: NdVector<2> = NdVector{coords: [1.0, 1.0]};
 let b: NdVector<2> = NdVector{coords: [1.0, 0.0]};
 let m: Matrix<2, 2> = Matrix::from_vectors(vec![a, b]);
