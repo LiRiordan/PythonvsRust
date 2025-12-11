@@ -60,4 +60,26 @@ impl<const N: usize, const M: usize> Matrix<N,M> {
                 }
                 Matrix::from_vectors(holder)
         }
+	pub fn has_zero_row(&self) -> bool {
+		let zero_row = [0.0; N];
+		let mut has_zero = false;
+		for r in self.entries { 
+			if r == zero_row {
+				has_zero = true;
+			}
+		}
+		has_zero
+	}
+	pub fn is_invertible(&self) -> bool {
+		if N != M {
+			panic!("A {}x{}-matrix cannot be invertible. Only square matrices can be invertible", N, M);
+		}
+		let gs_m: Matrix<N, M> = self.gs();
+		!gs_m.has_zero_row()
+	}
+	pub fn lin_indep_rows(&self) -> bool {
+		let gs_m: Matrix<N,M> = self.gs();
+		!gs_m.has_zero_row()
+	}
+			
 }  

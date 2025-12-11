@@ -17,4 +17,5 @@ fn main() {
 	let m2: Matrix<2, 2> = Matrix::from_vectors(vec![a, b]);
 	println!("Can we glue vectors together?: {:?}", m2);
 	println!("The Gram-Schmidt algorithm applied to this matrix is {:?}", m2.gs());
+	println!("The vectors a and b are linearly independent: {}", m2.lin_indep_rows());
 }

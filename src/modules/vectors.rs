@@ -1,3 +1,5 @@
+
+
 #[derive(Debug)]
 pub struct NdVector<const N: usize> {
 	pub coords: [f64;N],
