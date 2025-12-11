@@ -63,7 +63,7 @@ We will now start adding more linear algebra algorithms for these two structs. C
 let a: NdVector<2> = NdVector{coords: [1.0, 1.0]};
 let b: NdVector<2> = NdVector{coords: [1.0, 0.0]};
 let m: Matrix<2, 2> = Matrix::from_vectors(vec![a, b]);
-println!("The Gram-Schmidt algorithm applied to the vectors a and b recovers: {:?}", m.gs());
+println!("Gram-Schmidt algorithm applied to a and b: {:?}", m.gs());
 ```
 
 We aim to implement QR, SVD and RREF in the near future.
