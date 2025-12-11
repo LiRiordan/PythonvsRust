@@ -35,13 +35,13 @@ In order to be able to store as much as possible on the stack rather than the he
 let v: NdVector<3> = NdVector{coords: [0.2, -0.9, 1.4]}
 ```
 
-An instance of NdVector<N> has the following functions: 
+An instance of NdVector'<N>' has the following functions: 
 - len() -> usize
-- dot_width(w: &NdVector<N>) -> f64
+- dot_width(w: &NdVector'<N>') -> f64
 - norm() -> f64
 - normalise()
-- project_to(w: &NdVector<N>) -> NdVector<N>
-- project_and_sub(w: &NdVector<N>)
+- project_to(w: &NdVector'<N>') -> NdVector'<N>'
+- project_and_sub(w: &NdVector'<N>')
 
 We will add clear documentation for these functions at a later date.
 
@@ -62,14 +62,14 @@ Again the generic parameters serve to allow us to use arrays over vectors to exp
 let m: Matrix<3, 2> = Matrix{entries: [[1.0, 4.2, 9.3], [-0.3, -0.6, 2.2]]}
 ```
 
-An instance of Matrix<N, M> has the following functions:
-- mul(w: &NdVector<N>) -> NdVector<M>
-- transpose() -> Matrix<M, N>
-- recover_column(j: usize) -> NdVector<M>
-- recover_row(i: usize) -> NdVector<N>
+An instance of Matrix'<N, M>' has the following functions:
+- mul(w: &NdVector'<N>') -> NdVector'<M>'
+- transpose() -> Matrix'<M, N>'
+- recover_column(j: usize) -> NdVector'<M>'
+- recover_row(i: usize) -> NdVector'<N>'
 - square() -> bool
-- from_vectors(lv: Vec<NdVector<N>>) -> Matrix<N, M>
-- gs() -> Matrix<N, M>
+- from_vectors(lv: Vec'<NdVector<N>>') -> Matrix'<N, M>'
+- gs() -> Matrix'<N, M>'
 - has_zero_row() -> bool
 - is_invertible() -> bool
 - lin_indep_rows() -> bool
