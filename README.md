@@ -1,7 +1,7 @@
 # PythonvsRust
 
 We will write a linear algebra library from scratch in Python and Rust in order to compare the inate speeds of these languages. In order to make this a fair comparison we will 
-use the minimal numbers of imports in both cases. In particular, the Python library won't use numpy as this is written in C.
+use the minimal numbers of imports in both cases. In particular, the Python library won't use numpy as this is written in C. For the Rust library we will split computations into batches of the same dimension and pass the compiler these dimensions in order to be able to use stack memory. This should allow a significant speed increase.
 
 --- 
 
@@ -16,7 +16,7 @@ use the minimal numbers of imports in both cases. In particular, the Python libr
 Along with the Rust files there are Cargo files which are used in any Rust crate. 
 
 ### main.rs:
-Currently contains some examples functions from the library.
+Currently contains some example functions from the library. Have a look for some basic library uses in Rust. 
 
 ### vectors.rs:
 Defines the struct NdVector 
@@ -76,7 +76,7 @@ Again we will add more documentation for these at a later date.
 
 ---
 
-## Future direction:
+## Future directions:
 
 We will now start adding more linear algebra algorithms for these two structs. Currently we have the Gram-Schmidt algorithm for the rows of a matrix through the function .gs()
 
@@ -89,6 +89,8 @@ println!("The Gram-Schmidt algorithm applied to the vectors a and b recovers: {:
 ```
 
 We aim to implement QR, SVD and RREF in the near future.
+
+After we have finished this Rust library we will start work on its Python equivalent in order to produce timing analysis of the two.
 
 
 
