@@ -24,8 +24,8 @@ Defines the struct NdVector
 ```rust
 pub struct NdVector<const N: usize> {
       pub coords: [f64; N]
-} ```
-
+}
+```
 In order to be able to store as much as possible on the stack rather than the heap we use arrays but this requires passing the struct the length of the vector.
 
 **Example**
@@ -50,7 +50,8 @@ Defines the struct Matrix
 ```rust
 pub struct Matrix<const N:usize, const M: usize> {
       pub entries: [[f64; N]; M]
-}```
+}
+```
 
 Again the generic parameters serve to allow us to use arrays over vectors to exploit stack memory over heap memory.
 
