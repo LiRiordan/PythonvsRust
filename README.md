@@ -35,7 +35,7 @@ In order to be able to store as much as possible on the stack rather than the he
 let v: NdVector<3> = NdVector{coords: [0.2, -0.9, 1.4]}
 ```
 
-An instance of NdVector'<N>' has the following functions: 
+An instance of NdVector\<N\> has the following functions: 
 - len() -> usize
 - dot_width(w: &NdVector'<N>') -> f64
 - norm() -> f64
