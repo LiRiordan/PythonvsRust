@@ -21,17 +21,17 @@ Currently contains some examples functions from the library.
 ### vectors.rs:
 Defines the struct NdVector 
 
-'''rust
+```rust
 pub struct NdVector<const N: usize> {
       pub coords: [f64; N]
-} '''
+} ```
 
 In order to be able to store as much as possible on the stack rather than the heap we use arrays but this requires passing the struct the length of the vector.
 
 **Example**
-'''rust
+```rust
 let v: NdVector<3> = NdVector{coords: [0.2, -0.9, 1.4]}
-'''
+```
 
 An instance of NdVector<N> has the following functions: 
 - len() -> usize
@@ -47,17 +47,17 @@ We will add clear documentation for these functions at a later date.
 
 Defines the struct Matrix
 
-'''rust
+```rust
 pub struct Matrix<const N:usize, const M: usize> {
       pub entries: [[f64; N]; M]
-}'''
+}```
 
 Again the generic parameters serve to allow us to use arrays over vectors to exploit stack memory over heap memory.
 
 **Example**
-'''rust
+```rust
 let m: Matrix<3, 2> = Matrix{entries: [[1.0, 4.2, 9.3], [-0.3, -0.6, 2.2]]}
-'''
+```
 
 An instance of Matrix<N, M> has the following functions:
 - mul(w: &NdVector<N>) -> NdVector<M>
@@ -80,12 +80,12 @@ Again we will add more documentation for these at a later date.
 We will now start adding more linear algebra algorithms for these two structs. Currently we have the Gram-Schmidt algorithm for the rows of a matrix through the function .gs()
 
 **Example**
-'''rust
+```rust
 let a: NdVector<2> = NdVector{coords: [1.0, 1.0]};
 let b: NdVector<2> = NdVector{coords: [1.0, 0.0]};
 let m: Matrix<2, 2> = Matrix::from_vectors(vec![a, b]);
 println!("The Gram-Schmidt algorithm applied to the vectors a and b recovers: {:?}", m.gs());
-'''
+```
 
 We aim to implement QR, SVD and RREF in the near future.
 
