@@ -1,6 +1,6 @@
 # PythonvsRust
 
-We will write a linear algebra library from scratch in Python and Rust in order to compare the inate speeds of these languages. In order to make this a fair comparison we will 
+I will write a linear algebra library from scratch in Python and Rust in order to compare the inate speeds of these languages. In order to make this a fair comparison we will 
 use the minimal numbers of imports in both cases. In particular, the Python library won't use numpy as this is written in C. For the Rust library we will split computations into batches of the same dimension and pass the compiler these dimensions in order to be able to use stack memory. All CPython variables live in the heap so we should expect this to give a significant speed increase for Rust. 
 
 --- 
