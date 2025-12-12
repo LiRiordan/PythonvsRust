@@ -1,7 +1,6 @@
 mod modules;
 use crate::modules::vectors::NdVector;
 use crate::modules::matrices::Matrix;
-//use crate::modules::algorithms::Algorithms;
 
 
 fn main() {
@@ -18,4 +17,7 @@ fn main() {
 	println!("Can we glue vectors together?: {:?}", m2);
 	println!("The Gram-Schmidt algorithm applied to this matrix is {:?}", m2.gs());
 	println!("The vectors a and b are linearly independent: {}", m2.lin_indep_rows());
+	let c: NdVector<2> = NdVector{coords: [9.3, -0.2]};
+	let m3: Matrix<2, 3> = Matrix::from_vectors(vec![a, b, c]);
+	println!("The vectors, a, b, c linearly independent: {:?}", m3.lin_indep_rows());
 }

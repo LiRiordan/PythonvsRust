@@ -1,11 +1,14 @@
 use crate::NdVector;
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 pub struct Matrix<const N: usize, const M: usize> {
 	pub entries: [[f64; N]; M],
 }
 
 impl<const N: usize, const M: usize> Matrix<N,M> {
+	pub fn shape(&self) -> (usize, usize) {
+		(N, M)
+	}
 	pub fn mul(&self, v: &NdVector<N>) -> NdVector<M> {
 		let mut w: [f64; M]  = [0.0; M];
 		for i in 0..M {
@@ -55,8 +58,14 @@ impl<const N: usize, const M: usize> Matrix<N,M> {
                         for w in &holder {
                                 row.project_and_sub(&w);
                         }
-                        row.normalise();
-                        holder.push(row);
+			if row.coords.iter().all(|&x| x.abs() < 1e-4) {
+				let kill_row: NdVector<N> = NdVector::zero();
+				holder.push(kill_row);
+			}
+			else { 
+  				row.normalise();
+                        	holder.push(row);
+			}
                 }
                 Matrix::from_vectors(holder)
         }

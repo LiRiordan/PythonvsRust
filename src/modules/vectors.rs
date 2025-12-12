@@ -1,6 +1,6 @@
 
 
-#[derive(Debug)]
+#[derive(Debug, Copy, Clone)]
 pub struct NdVector<const N: usize> {
 	pub coords: [f64;N],
 }
@@ -16,6 +16,9 @@ impl<const N: usize>  NdVector<N> {
 			t += self.coords[i] * w.coords[i];
 		}
 		t
+	}
+	pub fn zero() -> NdVector<N> {
+		NdVector {coords: [0.0; N]}
 	}	
 	pub fn norm(&self) -> f64 {
 		self.dot_with(&self).sqrt()
